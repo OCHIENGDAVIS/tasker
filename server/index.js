@@ -1,23 +1,18 @@
 const express = require('express');
+
 const { sequelize, User } = require('./models');
+const personnelRoutes = require('./routes/personel');
+const taskRoutes = require('./routes/task');
 
 const app = express();
 
 app.use(express.json());
 
+app.use('/personnel', personnelRoutes);
+app.use('/tasks', taskRoutes);
+
 app.get('/', (req, res) => {
   res.send({ message: 'Hello there' });
-});
-
-app.post('/users', async (req, res) => {
-  const { name, email, role } = req.body;
-  try {
-    const user = await User.create({ name, email, role });
-    return res.json();
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
-  }
 });
 
 app.listen(5000, async () => {
