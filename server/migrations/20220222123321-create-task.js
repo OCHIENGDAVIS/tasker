@@ -30,6 +30,10 @@ module.exports = {
       autoplay: Sequelize.STRING,
       comments: Sequelize.STRING,
       registration: Sequelize.STRING,
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
