@@ -33,7 +33,6 @@ router.post(
       });
       return res.status(201).json(newUser);
     } catch (error) {
-      console.log(error);
       return res.status(400).json({ mesage: 'Something went wrong' });
     }
   }
@@ -45,7 +44,6 @@ router.post(
   body('password').not().isEmpty().trim().escape(),
   async (req, res) => {
     const errors = validationResult(req);
-    console.log('EEROR', errors);
     if (!errors.isEmpty()) {
       return res.status(400).json({ erros: errors.array() });
     }
@@ -73,7 +71,6 @@ router.post(
         expires_in: '24h',
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).json({ message: 'Something went wrong' });
     }
   }

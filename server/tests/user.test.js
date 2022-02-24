@@ -7,7 +7,7 @@ afterEach(async () => {
   await User.destroy({ where: {} });
 });
 
-describe('Authentication', () => {
+describe('User Routes', () => {
   describe('POST /personnel/register', () => {
     describe('When given all the correct details', () => {
       it('saves a user to the database and return the User', async () => {
