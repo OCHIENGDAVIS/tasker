@@ -10,14 +10,13 @@ router.post('/create', async (req, res) => {
   if (isEmpty) {
     return res.status(400).json({
       message:
-        'a task musst have some properties such as "customer_phone", "customer_first_name" etc',
+        'a task must have some properties such as "customer_phone", "customer_first_name" etc',
     });
   }
   try {
     const task = await Task.create({ ...req.body, userId: id });
     return res.status(201).json(task);
   } catch (error) {
-    console.log(error);
     return res.status(400).send({ message: 'something went wrong' });
   }
 });
@@ -58,7 +57,6 @@ router.get('/assigned', async (req, res) => {
       tasks: assignedTasks.rows,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({ message: 'something went wrong' });
   }
 });

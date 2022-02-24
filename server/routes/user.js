@@ -33,8 +33,7 @@ router.post(
       });
       return res.status(201).json(newUser);
     } catch (error) {
-      console.log(error);
-      return res.json({ mesage: 'Something went wrong' });
+      return res.status(400).json({ mesage: 'Something went wrong' });
     }
   }
 );
@@ -43,7 +42,6 @@ router.post(
   '/login',
   body('phone').not().isEmpty().trim().escape(),
   body('password').not().isEmpty().trim().escape(),
-  // passport.authenticate('local'),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -51,13 +49,18 @@ router.post(
     }
     try {
       const { phone, password } = req.body;
+
       const user = await User.findOne({ where: { phone } });
       if (!user) {
-        return res.json({ message: 'user not found' });
+        return res
+          .status(400)
+          .json({ error: { password: 'incorrect password' } });
       }
       const IsvalidPassword = await bcrypt.compare(password, user.password);
       if (!IsvalidPassword) {
-        return res.json({ message: 'invalid password' });
+        return res
+          .status(400)
+          .json({ error: { password: 'incorrect password' } });
       }
       const token = await jwt.sign({ user }, keys.JWT_SECRET, {
         expiresIn: '24h',
@@ -68,8 +71,7 @@ router.post(
         expires_in: '24h',
       });
     } catch (error) {
-      console.log(error);
-      return res.json({ message: 'Something went wrong' });
+      return res.status(400).json({ message: 'Something went wrong' });
     }
   }
 );
