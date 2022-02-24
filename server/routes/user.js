@@ -34,7 +34,7 @@ router.post(
       return res.status(201).json(newUser);
     } catch (error) {
       console.log(error);
-      return res.json({ mesage: 'Something went wrong' });
+      return res.status(400).json({ mesage: 'Something went wrong' });
     }
   }
 );
@@ -53,7 +53,7 @@ router.post(
       const { phone, password } = req.body;
       const user = await User.findOne({ where: { phone } });
       if (!user) {
-        return res.json({ message: 'user not found' });
+        return res.status(404).json({ message: 'user not found' });
       }
       const IsvalidPassword = await bcrypt.compare(password, user.password);
       if (!IsvalidPassword) {
@@ -69,7 +69,7 @@ router.post(
       });
     } catch (error) {
       console.log(error);
-      return res.json({ message: 'Something went wrong' });
+      return res.status(400).json({ message: 'Something went wrong' });
     }
   }
 );
