@@ -10,7 +10,7 @@ afterEach(async () => {
 describe('Authentication', () => {
   describe('POST /personnel/register', () => {
     describe('When given all the correct details', () => {
-      it('saves a user to the database and the User', async () => {
+      it('saves a user to the database and return the User', async () => {
         const response = await request(app).post('/personnel/register').send({
           email: '1mail@gmial.com',
           firstname: 'somefirstname',
@@ -42,9 +42,47 @@ describe('Authentication', () => {
         const response = await request(app)
           .post('/personnel/register')
           .send({});
-        console.log(response.body);
         expect(response.statusCode).toBe(400);
         expect(response.body.erros.length).toBeGreaterThan(0);
+      });
+    });
+  });
+  describe('POST /personnel/login', () => {
+    describe('when given correct username and password', () => {
+      it('logs user in and return JSON Web Token', async () => {
+        await request(app).post('/personnel/register').send({
+          email: 'test@gmial.com',
+          firstname: 'somefirstname',
+          lastname: 'somelastname',
+          password: 'testpassword',
+          phone: '2222222222',
+        });
+        const response = await request(app).post('/personnel/login').send({
+          password: 'testpassword',
+          phone: '2222222222',
+        });
+        const { accessToken } = response.body;
+        expect(accessToken).toBeTruthy();
+        expect(accessToken).toBeDefined();
+        expect(response.body).toHaveProperty('reset_password', 0);
+        expect(response.body).toHaveProperty('expires_in', '24h');
+      });
+      describe('when given no username and password', () => {
+        it('returns an error message', async () => {
+          const response = await request(app).post('/personnel/login').send({});
+          const { erros } = response.body;
+          expect(erros.length).toBeGreaterThan(0);
+        });
+      });
+      describe('when given wrong username and password', () => {
+        it('returns an error message', async () => {
+          const response = await request(app).post('/personnel/login').send({
+            phone: '123456',
+            password: 'wrongpassword',
+          });
+          const { error } = response.body;
+          expect(error).toHaveProperty('password', 'incorrect password');
+        });
       });
     });
   });
