@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+require('dotenv').config();
 
 const userRoutes = require('./routes/user');
 const taskRoutes = require('./routes/task');

@@ -6,14 +6,11 @@ A task scheduling application written in (Nodejs + Express), Sequalize, Postgres
 
 1. Preparing your databases
    1. create a postgres database instance on your machine
-   2. create a new folder inside `server` named `config`
-   3. Inside the `config` folder, create an `index.js` file and a `config.json` file
-   4. Populate the `config.json` file with postgress database credentials as follows:.
-      `{ "development": { "username": "db-user", "password": "db-password", "database": "db-name", "host": "db-host", "dialect": "db-dialect" }, "test": { "username": "db-user", "password": "db-password", "database": "db-name", "host": "db-host", "dialect": "db-dialect" } }`
+   2. run `sequelize db:init`
+   3. Add the database credentials and the app JWT Secret key in the .env file
 2. Migrate the Database
    1. run `sequelize db:migrate`
-3. Inside the `indexjs` of the `config foder` add the following:.
-   `module.exports = { JWT_SECRET: 'super-secret-key', }; `
+3.
 4. Running the Project
    1. cd `server` folder and run `npm install` and `npm start`
 
