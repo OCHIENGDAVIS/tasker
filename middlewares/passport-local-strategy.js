@@ -5,7 +5,6 @@ const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const { User } = require('../models');
-const keys = require('../config');
 
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
@@ -37,7 +36,7 @@ passport.use(
 passport.use(
   new JWTstrategy(
     {
-      secretOrKey: keys.JWT_SECRET,
+      secretOrKey: process.env.JWT_SECRET,
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     },
     async (token, done) => {
