@@ -2,6 +2,8 @@
 
 A task scheduling application written in (Nodejs + Express), Sequalize, Postgress and Passport js.
 
+## Hosted On Heroku [API ONLY](https://afternoon-fjord-69264.herokuapp.com)
+
 ## Testing the Project localy
 
 1. Preparing your databases
