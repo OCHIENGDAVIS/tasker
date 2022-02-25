@@ -2,7 +2,7 @@
 
 A task scheduling application written in (Nodejs + Express), Sequalize, Postgress and Passport js.
 
-## Testing the Poject locally
+## Testing the Project localy
 
 1. Preparing your databases
    1. create a postgres database instance on your machine
