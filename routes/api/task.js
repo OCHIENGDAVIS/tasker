@@ -2,7 +2,7 @@ const { compareSync } = require('bcryptjs');
 const express = require('express');
 const router = express.Router();
 
-const { Task } = require('../models');
+const { Task } = require('../../models');
 
 router.post('/create', async (req, res) => {
   const { id } = req.user;
