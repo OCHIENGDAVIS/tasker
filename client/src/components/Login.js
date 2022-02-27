@@ -21,6 +21,7 @@ const Login = ({ loginUser, auth }) => {
   return (
     <div className="w-full mb-8">
       <div className="w-4/5 m-auto">
+        <h1 className="font-bold text-2xl">Login Form</h1>
         <span className="text-red-800">{auth.error ? auth.error : null}</span>
         <form className="">
           <div className="w-full mt-8">

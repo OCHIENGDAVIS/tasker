@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from './types';
+import {
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_FAIL,
+  USER_LOGOUT,
+} from './types';
 
 export const loginUser = (userData) => {
   return async (dispath) => {
@@ -8,11 +14,11 @@ export const loginUser = (userData) => {
       const { accessToken } = data;
       if (accessToken) {
         // set the token in the local storage
+        localStorage.setItem('accessToken', accessToken);
         dispath({
           type: LOGIN_USER_SUCCESS,
           payload: accessToken,
         });
-        // navigate to login
       }
     } catch (e) {
       dispath({
@@ -20,5 +26,36 @@ export const loginUser = (userData) => {
         payload: 'something went wrong!, invalid username or password',
       });
     }
+  };
+};
+
+export const registerUser = (userData) => {
+  return async (dispath) => {
+    try {
+      const { data } = await axios.post('/api/personnel/register', userData);
+      const { email } = data;
+      if (email) {
+        dispath({
+          type: REGISTER_USER_SUCCESS,
+          payload: email,
+        });
+      }
+    } catch (e) {
+      dispath({
+        type: REGISTER_USER_FAIL,
+        payload:
+          'Something is wrong with the information you are providing, (email MUST be unique)',
+      });
+    }
+  };
+};
+
+export const logoutUser = () => {
+  return (dispath) => {
+    // TODO => invalidate token on the server
+    localStorage.removeItem('accessToken');
+    dispath({
+      type: USER_LOGOUT,
+    });
   };
 };
