@@ -22,6 +22,12 @@ router.post(
     }
     try {
       const { email, firstname, lastname, password, phone } = req.body;
+      const userExists = await User.findOne({ where: { email } });
+      if (userExists) {
+        return res
+          .status(400)
+          .json({ message: 'something went wrong, user already exists ' });
+      }
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = await User.create({
         email,

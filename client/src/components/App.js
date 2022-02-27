@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
+import Logout from './Logout';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </div>
       </BrowserRouter>
