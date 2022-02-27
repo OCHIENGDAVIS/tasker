@@ -64,13 +64,15 @@ router.post(
       const token = await jwt.sign({ user }, process.env.JWT_SECRET, {
         expiresIn: '24h',
       });
-      return res.json({
+      return res.status(200).json({
         reset_password: 0,
         accessToken: token,
         expires_in: '24h',
       });
     } catch (error) {
-      return res.status(400).json({ message: 'Something went wrong' });
+      return res
+        .status(400)
+        .json({ error: { password: 'something went wrong' } });
     }
   }
 );

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Header = () => {
+const Header = ({ auth }) => {
   return (
-    <header className="bg-blue-100 flex px-6 py-4">
+    <header className="bg-blue-100 flex px-6 py-4 mb-16">
       <div>
         <Link to="/">Tasker App</Link>
       </div>
@@ -21,5 +22,10 @@ const Header = () => {
     </header>
   );
 };
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth,
+  };
+};
 
-export default Header;
+export default connect(mapStateToProps)(Header);
