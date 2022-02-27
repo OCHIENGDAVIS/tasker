@@ -19,16 +19,16 @@ A task scheduling application written in (Nodejs + Express), Sequalize, Postgres
 ## Available Routes
 
 1. Register a User
-   1. `/personnel/register`
+   1. `/api/personnel/register`
       payload `{"email": "mail", "firstname": "mike", "lastname": "brown", "password":"password", "phone": "22222"}`
 2. Login user
-   1. `/personnel/register`
+   1. `/api/personnel/register`
    2. provide `{"phone":"phone", "password", "password"}` as payload
 3. Create a task
-   1. `/personnel/register`
+   1. `/api/personnel/register`
    2. it requires a `Bearer <TOKEN>` in the header
 4. Get assigned tasks
-   1. `tasks/assigned`
+   1. `/api/tasks/assigned`
       1. it requires a `Bearer <TOKEN>` in the header
 
 ## Running Tests
