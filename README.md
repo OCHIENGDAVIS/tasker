@@ -33,4 +33,4 @@ A task scheduling application written in (Nodejs + Express), Sequalize, Postgres
 
 ## Running Tests
 
-Run `npm run test` inside the server folder
+Run `npm run test` on the root of the project

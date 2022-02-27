@@ -9,7 +9,7 @@ import Home from './Home';
 
 const App = () => {
   return (
-    <div>
+    <div className="">
       <BrowserRouter>
         <div>
           <Header />
