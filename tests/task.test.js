@@ -1,4 +1,5 @@
 const request = require('supertest');
+require('dotenv').config();
 
 const app = require('../app');
 const { Task, User } = require('../models');

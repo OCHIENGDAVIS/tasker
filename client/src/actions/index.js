@@ -5,6 +5,8 @@ import {
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAIL,
   USER_LOGOUT,
+  ALL_TASKS,
+  ALL_TASKS_FAIL,
 } from './types';
 
 export const loginUser = (userData) => {
@@ -57,5 +59,26 @@ export const logoutUser = () => {
     dispath({
       type: USER_LOGOUT,
     });
+  };
+};
+
+export const getAllTasks = () => {
+  return async (dispath) => {
+    try {
+      const { data } = await axios.get('/api/tasks/assigned', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      dispath({
+        type: ALL_TASKS,
+        payload: data,
+      });
+    } catch (e) {
+      dispath({
+        type: ALL_TASKS_FAIL,
+        payload: 'something went wrong!, ould not get all tasks',
+      });
+    }
   };
 };

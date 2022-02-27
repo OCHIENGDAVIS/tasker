@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 import { loginUser } from '../actions';
 
@@ -54,6 +54,12 @@ const Login = ({ loginUser, auth }) => {
               Login
             </button>
           </div>
+          <p className=" mt-2">
+            Don't' have an account?
+            <span className="text-blue-700">
+              <Link to="/register">register</Link>
+            </span>
+          </p>
         </form>
       </div>
     </div>
