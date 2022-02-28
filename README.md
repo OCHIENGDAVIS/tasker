@@ -14,7 +14,7 @@ A task scheduling application written in (Nodejs + Express), Sequalize, Postgres
    1. run `sequelize db:migrate`
 3.
 4. Running the Project
-   1. cd `server` folder and run `npm install` and `npm start`
+   1. run `npm install` and `npm start`
 
 ## Available Routes
 
